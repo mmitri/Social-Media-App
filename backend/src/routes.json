@@ -1,0 +1,230 @@
+Add profile elements
+  /profile
+  add_profile[POST]
+    Input =
+      {
+        "name": "name",
+        "email": "email",
+        "gender": "gender",
+        "sexual_orientation": "sexual_orientation",
+        "note": "note"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+  Edit Profile 
+  edit_profile[PUT]
+  /profile
+    Only the things that user wants to change will be populated with not null
+    Input =
+      {
+        "name": "null",
+        "email": "null",
+        "gender": "null",
+        "sexual_orientation": "null",
+        "note": "null",
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+  view_profile[GET]
+    Input = /profile/get/<uid>
+    Return =
+      {
+        "name": "name",
+        "gender": "gender",
+        "sexual_orientation": "sexual_orientation",
+        "note": "note",
+      }
+
+
+add Like
+  add_like_dislike[POST]
+    Input =
+      {
+        "post_id": "int",
+        "user_id": "int",
+        "like_dislike": "boolean",
+      }
+      Return =
+        200 if successful
+        cooresponding error code if not
+
+get like by post id[GET]
+Input = /like/<ID>
+Return = {
+  "likes": "int",
+}
+
+get dislikes by post_id[GET]
+Input  = /dislike/<ID>
+Return = {
+  "dislikes": "int",
+}
+
+
+Add/Edit/get comment
+  add_comment[POST]
+    Input =
+      {
+        "post_id": "123",
+        "comment_body": "comment",
+        "user_id": "1",
+        "file_url": "String",
+      }
+      Return =
+        200 if successful
+        cooresponding error code if not
+
+  edit_comment[PUT]
+    Input =
+      {
+        "post_id": "123",
+        "comment_body": "comment",
+        "user_id": "1",
+        "file_url": "String"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+Add Post
+/post
+  add_post[POST]
+    Input =
+      {
+        "title": "title",
+        "message": "message",
+        "user_id": "user_id",
+        "file_url": "String"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+  edit_post[PUT]
+  /post
+    Only the things that user wants to change will be populated with not null
+    Input =
+      {
+        "title": "null",
+        "message": "null",
+        "user_id": "null",
+        "file_url": "String"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+Get uid
+  get_uid[GET]
+    Input = /profile/uid/<email>
+    Returns =
+      {
+        "email": "123@gmail.com"
+      }
+
+Get All posts
+  get_posts[GET]
+  Input = /posts/
+  Returns =
+    {
+      post1:
+      {
+        "title": "null",
+        "message": "null",
+        "user_id": "null",
+        "comment1": {
+          "post_id": "123",
+          "comment_body": "comment",
+          "user_id": "1"
+        },
+        "comment2": {
+          "post_id": "123",
+          "comment_body": "comment2",
+          "user_id": "2"
+        }
+      },
+      "post2":
+      {
+        "title": "null",
+        "message": "null",
+        "user_id": "null"
+      },
+      ...
+    }
+
+Get post by ID
+/post/<id>
+get_post_byID[GET]
+Returns {
+  {
+    "title": "null",
+    "message": "null",
+    "user_id": "null",
+    "comment1": {
+      "post_id": "123",
+      "comment_body": "comment",
+      "user_id": "1"
+    },
+    "comment2": {
+      "post_id": "123",
+      "comment_body": "comment2",
+      "user_id": "2"
+    }
+  }
+}
+
+Get All Profiles
+    get_profiles[GET]
+    Input = /allProfiles/
+    Returns = {
+       {
+        "id": "int",
+        "name": "String",
+        "email": "String",
+        "gender": "String",
+        "sexual_orientation": "String",
+        "note": "String", 
+      }
+      },
+      { "id": "int",
+      "name": "String",
+      "email": "String",
+      "gender": "String",
+      "sexual_orientation": "String",
+      "note": "String", 
+    }
+    }
+
+Get profile by ID
+    get_profile_byID[GET]
+    Input = /profile/<ID>
+    Returns = {
+      {
+        "id": "int",
+        "name": "String",
+        "email": "String",
+        "gender": "String",
+        "sexual_orientation": "String",
+        "note": "String", 
+      }
+    }
+
+Get user ID by email
+    get_id_byEmail[GET]
+    Input = /idEmail/<user_email>
+    Returns:{
+      "id": "int",
+    }
+
+
+AUTH[post]
+Input = {"user": "String",
+        "IDToken": "String",
+}
+Returns:{
+"data": "boolean",
+}
