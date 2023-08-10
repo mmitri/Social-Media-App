@@ -1,0 +1,23 @@
+.add-button {
+    position: fixed;
+    bottom: 25px;;
+    right: 25px;;
+    color:black;
+    background-color: gray;
+}
+
+.edit-button {
+    position: fixed;
+    top: 65px;;
+    right: 25px;;
+    color:black;
+    background-color: gray;
+}
+
+.logout-button {
+    position: fixed;
+    top: 55px;;
+    right: 25px;;
+    color:black;
+    background-color: gray;
+}

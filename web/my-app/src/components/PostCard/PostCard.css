@@ -1,0 +1,23 @@
+.postcard {
+    /* position: relative; */
+    margin: auto;
+    width: 50%;
+    background-color:antiquewhite;
+    color: #000;
+    opacity: .5;
+   text-align: left;
+}
+
+.messageContent{
+    padding-left: 25px;
+}
+
+ 
+/* .likeButton{
+    /* position:relative; */
+    /* top: 75%; */
+    /* left: 25%; */
+    /* bottom:10px; */ 
+    /* float: right; */
+    /* float:inline-end; */
+/* } */ 
