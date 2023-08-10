@@ -1,0 +1,136 @@
+
+///--------------------------------------------Profiles----------------------------------------------------
+
+/allProfiles
+
+//curl -s http://localhost:4567/profile/15
+Spark.get("/profile/:id")
+INPUT:
+  int idx = Integer.parseInt(request.params("id"));
+ON ERROR:
+  A structured response is {message, data}
+  gson.toJson(new StructuredResponse("error", idx + " not found"));
+ON OK:
+  A structured response is {message, data}
+  gson.toJson(new StructuredResponse("ok", user));
+
+GET REQUEST
+"/idEmail/:email"
+        INPUT:
+            String idx = request.params("email");
+        ON ERROR:
+            A structured response is {message, data}
+            gson.toJson(new StructuredResponse("error", idx + " not found"));
+        ON OK:
+            A structured response is {message, data}
+            gson.toJson(new StructuredResponse("ok", user))
+
+//curl -s http://localhost:4567/profile -X POST -d "{'name':'test_name','user_email':'test_email','gender':'test_gender','sexual_orientation':'test_sexual_orientation','note':'test_note','valid':true}"
+POST
+"/profile"
+        INPUT:
+{'name':'test_name','user_email':'test_email','gender':'test_gender','sexual_orientation':'test_sexual_orientation','note':'test_note','valid':true}
+        RETURN 200 if ok
+
+//curl -s http://localhost:4567/profile -X PUT -d "{'name':'I hope','user_email':'123@gmail.com','gender':'my Update Test works2','sexual_orientation':'null','note':'test_note'}"
+PUT
+"/profile"
+        INPUT:
+{'name':'I hope','user_email':'123@gmail.com','gender':'my Update Test works2','sexual_orientation':'null','note':'test_note'}
+        RETURN 200 if ok
+
+//curl -s http://localhost:4567/profile -X DELETE -d "{'id':15}
+Spark.delete("/profile/:id", (request, response) -> {
+INPUT:
+  int idx = Integer.parseInt(request.params("id"));
+ON ERROR:
+  A structured response is {message, data}
+  gson.toJson(new StructuredResponse("error", idx + " not found"));
+ON OK:
+  A structured response is {message, data}
+  gson.toJson(new StructuredResponse("ok", user));
+
+
+///---------------------------------Posts--------------------------------------------
+//curl -s http://localhost:4567/post -X POST -d "{'title':'newtitle','message':'user6wrote this','user_id':6}"
+Spark.post("/post", (request, response) -> {
+INPUT:
+{'title':'newtitle','message':'user6wrote this','user_id':6}
+        ON ERROR:
+          return gson.toJson(new StructuredResponse("error", "error performing insertion"));
+        ON OK:
+          return gson.toJson(new StructuredResponse("ok", "" + newpostId));
+
+//curl -s http://localhost:4567/post/11
+Spark.get("/post/:id", (request, response) -> {
+
+on ERROR:
+  return gson.toJson(new StructuredResponse("error", idx + " not found"));
+on OK:
+  return gson.toJson(new StructuredResponse("ok", data));
+
+//curl -s http://localhost:4567/post -X PUT -d "{'title':'null','message':'user6wrote this updated','post_id':6}"
+Spark.put("/post"
+INPUT:
+{'title':'null','message':'user6wrote this updated','post_id':6}
+ON ERROR:
+return gson.toJson(new StructuredResponse("error", "error performing insertion"));
+ON OK:
+return gson.toJson(new StructuredResponse("ok", "" + newId));
+
+
+Spark.get("/allPosts"
+        returns all posts
+        RETURNS:
+{"mMessage":"okayyyyyforsure","mData":[{"post_id":1,"title":"First Post","message":"User two wrote this","user_id":2,"valid":true,"poster_name":"Horatio Doonican","likes_number":1,"dislikes_number":1,"comments":[{"comment_id":10,"post_id":1,"user_id":11,"message":"I do not like this post"}]},{"post_id":2,"title":"Second Post","message":"User three wrote this","user_id":3,"valid":true,"poster_name":"Eva Marrows","likes_number":1,"dislikes_number":0,"comments":[{"comment_id":9,"post_id":2,"user_id":10,"message":"I like this post"}]}
+
+///-------------------------------Likes--------------------------
+//curl -s http://localhost:4567/post -X POST -d "{'post_id':'5','user_id':'3','like':true}"
+Spark.post("/like"
+        on err:
+return gson.toJson(new StructuredResponse("error", "error performing insertion"))
+      on ok:
+return gson.toJson(new StructuredResponse("ok", "" + newId));
+
+//curl -s http://localhost:4567/like/14 -X GET
+Spark.get("/like/:id", (request, response) -> {
+on err:
+return gson.toJson(new StructuredResponse("error", idx + " not found as valid post"));
+on ok:
+return gson.toJson(new StructuredResponse("ok", num));
+
+//curl -s http://localhost:4567/dislike/14 -X GET
+Spark.get("/dislike/:id", (request, response) -> {
+on err:
+return gson.toJson(new StructuredResponse("error", idx + " not found as valid post"));
+on ok:
+return gson.toJson(new StructuredResponse("ok", num));
+
+
+///--------------------------------Comments----------------------------
+//curl -s http://localhost:4567/comment -X POST -d "{'post_id':5,'user_id':'3','comment_body':'Well I actually like this post loooser'}"
+Spark.post("/comment"on err:
+return gson.toJson(new StructuredResponse("error", idx + " not found as valid post"));
+on ok:
+return gson.toJson(new StructuredResponse("ok", num));
+
+//curl -s http://localhost:4567/comment -X PUT -d "{'post_id':5,'user_id':'3','comment_body':'Well I actually like this post loooser updated'}"
+Spark.put("/comment"on err:
+return gson.toJson(new StructuredResponse("error", idx + " not found as valid post"));
+on ok:
+return gson.toJson(new StructuredResponse("ok", num));
+
+//curl -s http://localhost:4567/allComments/5 -X GET
+Spark.get("/allComments/:postid"on err:
+return gson.toJson(new StructuredResponse("error", idx + " not found as valid post"));
+on ok:
+return gson.toJson(new StructuredResponse("ok", num));
+{"mMessage":"okayyyyyforsure","mData":[{"comment_id":6,"post_id":5,"user_id":7,"message":"I do not like this post"},{"comment_id":13,"post_id":5,"user_id":3,"message":"Well I actually like this post loooser updated"}]}
+
+///------------------------------------------Auth-------------------------------------------
+Spark.post("/auth", (request, response) -> {
+
+on errr:
+return gson.toJson(new StructuredResponse("notokAuth", false));
+on ok:
+return gson.toJson(new StructuredResponse("okAuth", true));
