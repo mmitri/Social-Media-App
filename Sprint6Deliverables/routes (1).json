@@ -1,0 +1,146 @@
+Add or edit profile elements
+  add_profile[PUT]
+    Input =
+      {
+        "name": "name",
+        "email": "email",
+        "gender": "gender",
+        "sexual_orientation": "sexual_orientation",
+        "note": "note"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+  edit_profile[POST]
+    Only the things that user wants to change will be populated with not null
+    Input =
+      {
+        "name": "null",
+        "email": "null",
+        "gender": "null",
+        "sexual_orientation": "null",
+        "note": "null",
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+  view_profile[GET]
+    Input = /profile/get/<uid>
+    Return =
+      {
+        "name": "name",
+        "gender": "gender",
+        "sexual_orientation": "sexual_orientation",
+        "note": "note",
+      }
+
+
+Like/Dislike
+  add_like[PUT]
+    Input =
+      {
+        "post_id": "123",
+        "user_id": "1",
+        "like_dislike": 1
+      }
+      Return =
+        200 if successful
+        cooresponding error code if not
+
+  add_dislike[PUT]
+    Input =
+      {
+        "post_id": "123",
+        "user_id": "1",
+        "like_dislike": 0
+      }
+      Return =
+        200 if successful
+        cooresponding error code if not
+
+Add/Edit/get comment
+  add_comment[PUT]
+    Input =
+      {
+        "post_id": "123",
+        "comment_body": "comment",
+        "user_id": "1"
+      }
+      Return =
+        200 if successful
+        cooresponding error code if not
+
+  edit_comment[POST]
+    Input =
+      {
+        "post_id": "123",
+        "comment_body": "comment",
+        "user_id": "1"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+Add/Edit Posts
+  add_post[PUT]
+    Input =
+      {
+        "title": "title",
+        "message": "message",
+        "user_id": "user_id"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+  edit_post[POST]
+    Only the things that user wants to change will be populated with not null
+    Input =
+      {
+        "title": "null",
+        "message": "null",
+        "user_id": "null"
+      }
+    Return =
+      200 if successful
+      cooresponding error code if not
+
+Get uid
+  get_uid[GET]
+    Input = /profile/uid/<email>
+    Returns =
+      {
+        "email": "123@gmail.com"
+      }
+
+Get All posts
+  get_posts[GET]
+  Input = /posts/
+  Returns =
+    {
+      post1:
+      {
+        "title": "null",
+        "message": "null",
+        "user_id": "null",
+        "comment1": {
+          "post_id": "123",
+          "comment_body": "comment",
+          "user_id": "1"
+        },
+        "comment2": {
+          "post_id": "123",
+          "comment_body": "comment2",
+          "user_id": "2"
+        }
+      },
+      "post2":
+      {
+        "title": "null",
+        "message": "null",
+        "user_id": "null"
+      },
+      ...
+    }
